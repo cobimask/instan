@@ -13,3 +13,12 @@ on:
         required: false
         default: '10'
         type: string
+
+env:
+  REPO_DIR: ${{ github.workspace }}
+  TAG: v1.0.0_${{ github.event.inputs.amd_override }}
+  LOOP: ${{ github.event.inputs.loop_override }}
+  ENV_MYWEB: ${{ secrets.ENV_MYWEB }}
+  ENV_ADS: ${{ secrets.ENV_ADS }}
+  ENV_DISD: ${{ secrets.ENV_DISD }}
+  HF_REPO: ${{ secrets.HF_REPO }}
